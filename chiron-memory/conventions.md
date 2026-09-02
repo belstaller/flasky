@@ -2,9 +2,9 @@
 
 A rule the codebase follows — naming, patterns, and where things live.
 
-## All internal navigation in this codebase links via `url_for('main.index')` / `url_for('.i…
+## Simple templates that extend `base.html` (e.g
 
-What: All internal navigation in this codebase links via `url_for('main.index')` / `url_for('.index')`, never a hardcoded `/` path string. · Why: This is what made moving the feed's route from `/` to `/feed` a one-line change with zero broken links. · Where: app/main/views.py, app/templates/*.html. · Learned: verify this convention holds before route-path changes; grep for hardcoded path strings as a safety check rather than assuming. <!-- id: 97631443-f707-499e-901c-566cfb28f43c-1 -->
+What: Simple templates that extend `base.html` (e.g. 403.html, 404.html) follow a minimal `{% block title %}` + `{% block page_content %}` structure with a `<h1>` inside a `div.page-header`. · Why: — · Where: app/templates/404.html, app/templates/403.html, app/templates/landing.html. · Learned: New stub/placeholder pages in this project should mirror this exact minimal block structure rather than inventing a new template layout. <!-- id: 97631443-f707-499e-901c-566cfb28f43c-2 -->
 
 ## Routes that are public but need different behavior for logged-in users (no `@login_requir…
 
