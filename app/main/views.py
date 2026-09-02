@@ -32,7 +32,14 @@ def server_shutdown():
     return 'Shutting down...'
 
 
-@main.route('/', methods=['GET', 'POST'])
+@main.route('/')
+def landing():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    return render_template('landing.html')
+
+
+@main.route('/feed', methods=['GET', 'POST'])
 def index():
     form = PostForm()
     if current_user.can(Permission.WRITE) and form.validate_on_submit():

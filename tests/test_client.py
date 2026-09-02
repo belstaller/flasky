@@ -17,8 +17,32 @@ class FlaskClientTestCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
-    def test_home_page(self):
+    def test_landing_page(self):
         response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('Welcome to Flasky' in response.get_data(as_text=True))
+
+    def test_landing_page_redirects_authenticated_user(self):
+        self.client.post('/auth/register', data={
+            'email': 'jane@example.com',
+            'username': 'jane',
+            'password': 'cat',
+            'password2': 'cat'
+        })
+        self.client.post('/auth/login', data={
+            'email': 'jane@example.com',
+            'password': 'cat'
+        })
+        user = User.query.filter_by(email='jane@example.com').first()
+        token = user.generate_confirmation_token()
+        user.confirm(token)
+        db.session.commit()
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.headers['Location'].endswith('/feed'))
+
+    def test_home_page(self):
+        response = self.client.get('/feed')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Stranger' in response.get_data(as_text=True))
 

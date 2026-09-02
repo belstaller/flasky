@@ -78,7 +78,7 @@ class SeleniumTestCase(unittest.TestCase):
     
     def test_admin_home_page(self):
         # navigate to home page
-        self.client.get('http://localhost:5000/')
+        self.client.get('http://localhost:5000/feed')
         self.assertTrue(re.search('Hello,\s+Stranger!',
                                   self.client.page_source))
 
