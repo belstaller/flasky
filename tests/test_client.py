@@ -20,7 +20,12 @@ class FlaskClientTestCase(unittest.TestCase):
     def test_landing_page(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Welcome to Flasky' in response.get_data(as_text=True))
+        data = response.get_data(as_text=True)
+        self.assertTrue('Sign Up' in data)
+        self.assertTrue('Log In' in data)
+        self.assertTrue('How it works' in data)
+        self.assertTrue('/auth/register' in data)
+        self.assertTrue('/auth/login' in data)
 
     def test_landing_page_redirects_authenticated_user(self):
         self.client.post('/auth/register', data={

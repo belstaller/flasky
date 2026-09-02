@@ -1,12 +1,50 @@
 {% extends "base.html" %}
 
-{% block title %}Flasky - Welcome{% endblock %}
+{% block title %}Flasky - Share your ideas{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Welcome to Flasky</h1>
+<div class="landing-hero">
+    <h1>Share your ideas. Follow the people who inspire you.</h1>
+    <p class="lead">
+        Flasky is a simple social blogging platform where you can publish posts,
+        build a following, and join the conversation — all in one place.
+    </p>
+    <p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}" role="button">Sign Up</a>
+        <a class="btn btn-default btn-lg" href="{{ url_for('auth.login') }}" role="button">Log In</a>
+    </p>
 </div>
-<div class="landing-placeholder">
-    <p>The marketing landing page content goes here.</p>
+
+<div class="landing-features">
+    <h2>Everything you need to blog and connect</h2>
+    <div class="landing-feature">
+        <h3>Markdown blog posts</h3>
+        <p>Write posts in Markdown with a live preview, then publish them instantly for your readers.</p>
+    </div>
+    <div class="landing-feature">
+        <h3>Followers &amp; following</h3>
+        <p>Follow the writers you care about and build your own audience as others follow you.</p>
+    </div>
+    <div class="landing-feature">
+        <h3>Threaded comments</h3>
+        <p>Spark discussion on every post with comments, moderated to keep conversations healthy.</p>
+    </div>
+    <div class="landing-feature">
+        <h3>User profiles</h3>
+        <p>Customize your profile with a photo, bio, and location so people know who they're following.</p>
+    </div>
+    <div class="landing-feature">
+        <h3>REST API</h3>
+        <p>Access posts, comments, and users programmatically through a full REST API.</p>
+    </div>
+</div>
+
+<div class="landing-how-it-works">
+    <h2>How it works</h2>
+    <ol>
+        <li>Create your free account in seconds.</li>
+        <li>Write your first post and follow people whose ideas inspire you.</li>
+        <li>Join the conversation through comments and grow your following.</li>
+    </ol>
 </div>
 {% endblock %}
